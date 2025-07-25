@@ -2,119 +2,32 @@
 <html>
 <head>
   <title>Daily Booking Report</title>
-  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <meta name="viewport" content="width=device-width, initial-scale=0.7">
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 15px;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
-      font-size: 18px;
+      font-size: 16px;
     }
     label {
       display: block;
-      margin-top: 15px;
+      margin-top: 12px;
       font-weight: bold;
     }
-    input, select {
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
       width: 100%;
-      padding: 12px;
-      font-size: 18px;
-      margin-top: 5px;
-      box-sizing: border-box;
+      padding: 6px;
+      font-size: 15px;
+      margin-top: 4px;
     }
     button {
-      margin-top: 25px;
-      padding: 15px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      font-size: 20px;
+      margin-top: 20px;
+      padding: 10px;
       width: 100%;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    button:hover {
-      background-color: #218838;
-    }
-  </style>
-</head>
-<body>
-  <h2>Daily Booking Report</h2>
-  <form method="POST" action="https://script.google.com/macros/s/AKfycbz7bUTx7Dk4UWlGqrhoT3XNTxXsKluhGyvp-j4Hd8N6BJq25_C4O8Sq499htebY5AHh2g/exec">
-
-    <label for="officeName">Office Name:</label>
-    <select name="officeName" id="officeName" required>
-      <option value="">Select Office</option>
-      <option value="Baghbanpura">Baghbanpura</option>
-      <option value="Shalamar Town NPO (1572)">Shalamar Town NPO (1572)</option>
-      <option value="Naulakha NPO">Naulakha NPO</option>
-    </select>
-
-    <label for="reportDate">Date of Report:</label>
-    <input type="date" name="reportDate" id="reportDate" required>
-
-    <label>Registered Letter:</label>
-    <input type="number" name="registeredletter">
-
-    <label>Registered Parcel:</label>
-    <input type="number" name="registeredParcel">
-
-    <label>Parcel Postage:</label>
-    <input type="number" name="parcelPostage">
-
-    <label>EMS:</label>
-    <input type="number" name="ems">
-
-    <label>Local Mail:</label>
-    <input type="number" name="localMail">
-
-    <label>International Mail:</label>
-    <input type="number" name="internationalMail">
-
-    <label>Money Order:</label>
-    <input type="number" name="moneyOrder">
-
-    <label>Cash on Delivery (COD):</label>
-    <input type="number" name="cod">
-
-    <label>Logistics Post:</label>
-    <input type="number" name="logisticsPost">
-
-    <label>Business Post:</label>
-    <input type="number" name="businessPost">
-
-    <label>Ordinary Post:</label>
-    <input type="number" name="ordinaryPost">
-
-    <label>Philately:</label>
-    <input type="number" name="philately">
-
-    <label>Savings Bank:</label>
-    <input type="number" name="savingBank">
-
-    <label>Other:</label>
-    <input type="number" name="other">
-
-    <button type="submit">Submit Report</button>
-  </form>
-
-  <script>
-    const form = document.querySelector('form');
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form)
-      });
-
-      if (response.ok) {
-        alert("✅ Report submitted successfully!");
-        form.reset();
-      } else {
-        alert("❌ Error submitting the form.");
-      }
-    });
-  </script>
-</body>
-</html>
+      background-color: #4CAF50;
+      color: white;
+      font
