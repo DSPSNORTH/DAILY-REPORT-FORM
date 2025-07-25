@@ -97,6 +97,23 @@
     <input type="number" name="other">
 
     <button type="submit">Submit Report</button>
-  </form>
+  </form><script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form)
+    });
+
+    if (response.ok) {
+      alert("✅ Report submitted successfully!");
+      form.reset();  // Clear form fields after submission
+    } else {
+      alert("❌ Error submitting the form.");
+    }
+  });
+</script>
+
 </body>
 </html>
