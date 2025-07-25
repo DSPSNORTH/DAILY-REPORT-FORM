@@ -2,12 +2,14 @@
 <html>
 <head>
   <title>Daily Booking Report Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Important for mobile -->
   <style>
     body {
-      font-family: Arial;
-      padding: 20px;
+      font-family: Arial, sans-serif;
+      padding: 15px;
       max-width: 600px;
       margin: auto;
+      font-size: 18px; /* larger font */
     }
     label {
       display: block;
@@ -16,16 +18,24 @@
     }
     input, select {
       width: 100%;
-      padding: 8px;
+      padding: 12px;
+      font-size: 18px;
       margin-top: 5px;
+      box-sizing: border-box;
     }
     button {
-      margin-top: 20px;
-      padding: 10px 15px;
+      margin-top: 25px;
+      padding: 15px;
       background-color: #28a745;
       color: white;
       border: none;
-      font-size: 16px;
+      font-size: 20px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #218838;
     }
   </style>
 </head>
@@ -86,4 +96,7 @@
     <label>Other:</label>
     <input type="number" name="other">
 
-    <button type="submit">Submit Report<
+    <button type="submit">Submit Report</button>
+  </form>
+</body>
+</html>
