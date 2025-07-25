@@ -3,147 +3,241 @@
 <html>
 <head>
   <title>Daily Booking Report</title>
-  <meta name="viewport" content="width=device-width, initial-scale=0.7">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: Arial, sans-serif; padding: 15px; max-width: 800px; margin: auto; font-size: 16px; }
-    label { display: block; margin-top: 12px; font-weight: bold; }
-    input[type="text"], input[type="number"], input[type="date"], select {
-      width: 100%; padding: 6px; font-size: 15px; margin-top: 4px;
+    body {
+      background-color: #cceeff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .row label {
+      flex: 1;
+      margin-right: 5px;
+    }
+    .row input, .row select {
+      flex: 2;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .row > * {
+      margin: 5px;
+      flex: 1;
+      min-width: 150px;
     }
     button {
-      margin-top: 20px; padding: 10px; width: 100%;
-      background-color: #4CAF50; color: white; font-size: 18px;
-      border: none; border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto 0;
     }
-    .success { color: green; margin-top: 15px; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h2>Daily Booking Report</h2>
-  <form id="bookingForm">
-    <label>Office Name</label>
-    <select name="officeName" required>
-      <option value="">-- Select Office --</option>
-      <option value="Adda Chabeel PO (1225)">Adda Chabeel PO (1225)</option>
-<option value="AG House PO (1217)">AG House PO (1217)</option>
-<option value="Aitchison College PO">Aitchison College PO</option>
-<option value="Alfalah PO">Alfalah PO</option>
-<option value="Allam Iqbal Road PO">Allam Iqbal Road PO</option>
-<option value="Baghban Pura PO">Baghban Pura PO</option>
-<option value="Baghbanpura NPO">Baghbanpura NPO</option>
-<option value="Barki PO">Barki PO</option>
-<option value="Bata Pur PO">Bata Pur PO</option>
-<option value="Batapur NPO (1580)">Batapur NPO (1580)</option>
-<option value="Chah Miran PO">Chah Miran PO</option>
-<option value="Chahmiran NPO (54)">Chahmiran NPO (54)</option>
-<option value="Daroghawala PO">Daroghawala PO</option>
-<option value="Dharampura PO">Dharampura PO</option>
-<option value="Ghaziabad PO (1303)">Ghaziabad PO (1303)</option>
-<option value="Gunj Mughalpura NPO (1576)">Gunj Mughalpura NPO (1576)</option>
-<option value="Gunj Mughalpura PO">Gunj Mughalpura PO</option>
-<option value="Harbans Pura PO">Harbans Pura PO</option>
-<option value="Harbanspura NPO (1577)">Harbanspura NPO (1577)</option>
-<option value="KEMC NPO">KEMC NPO</option>
-<option value="Lakshmi Chowk PO">Lakshmi Chowk PO</option>
-<option value="Mehmood Booti PO (1388)">Mehmood Booti PO (1388)</option>
-<option value="Misri Shah PO">Misri Shah PO</option>
-<option value="Mughalpura PO">Mughalpura PO</option>
-<option value="Nabi Pura PO">Nabi Pura PO</option>
-<option value="Nabipura NPO (1678)">Nabipura NPO (1678)</option>
-<option value="Naulakha NPO">Naulakha NPO</option>
-<option value="Naulakha PO">Naulakha PO</option>
-<option value="Pakistan Times PO">Pakistan Times PO</option>
-<option value="PG HOUSE PO">PG HOUSE PO</option>
-<option value="Railway HQ PO">Railway HQ PO</option>
-<option value="Shad Bagh NPO (1573)">Shad Bagh NPO (1573)</option>
-<option value="Shad Bagh PO">Shad Bagh PO</option>
-<option value="Shalamar Town PO">Shalamar Town PO</option>
-<option value="Shalimar Town NPO (1572)">Shalimar Town NPO (1572)</option>
-<option value="Sultanpura PO">Sultanpura PO</option>
-<option value="Taj Company NPO">Taj Company NPO</option>
-<option value="Taj Company PO">Taj Company PO</option>
-<option value="UET PO">UET PO</option>
-<option value="V.R.I PO (1366)">V.R.I PO (1366)</option>
-<option value="Wagha PO">Wagha PO</option>
-    </select>
-    <label>Report Date</label>
-    <input type="date" name="reportDate" required>
-<label>RGL PS</label><input type="number" name="RGL_PS" min="0">
-<label>RGL OPSS</label><input type="number" name="RGL_OPSS" min="0">
-<label>RGL Others</label><input type="number" name="RGL_Others" min="0">
-<label>Parcel</label><input type="number" name="Parcel" min="0">
-<label>Parcel Postage</label><input type="number" name="Parcel_Postage" min="0">
-<label>VPL</label><input type="number" name="VPL" min="0">
-<label>VPL Amount</label><input type="number" name="VPL_Amount" min="0">
-<label>VPP</label><input type="number" name="VPP" min="0">
-<label>VPP Amount</label><input type="number" name="VPP_Amount" min="0">
-<label>Frgn Regd Letter</label><input type="number" name="Frgn_Regd_Letter" min="0">
-<label>Frgn Regd Fee</label><input type="number" name="Frgn_Regd_Fee" min="0">
-<label>Frgn Regd Parcel</label><input type="number" name="Frgn_Regd_Parcel" min="0">
-<label>Frgn Parcel Postage</label><input type="number" name="Frgn_Parcel_Postage" min="0">
-<label>EMS</label><input type="number" name="EMS" min="0">
-<label>EMS Fee</label><input type="number" name="EMS_Fee" min="0">
-<label>EMS GST</label><input type="number" name="EMS_GST" min="0">
-<label>UMS</label><input type="number" name="UMS" min="0">
-<label>UMS Value</label><input type="number" name="UMS_Value" min="0">
-<label>UMS GST</label><input type="number" name="UMS_GST" min="0">
-<label>COD</label><input type="number" name="COD" min="0">
-<label>COD Value</label><input type="number" name="COD_Value" min="0">
-<label>COD Fee</label><input type="number" name="COD_Fee" min="0">
-<label>Same Day Delivery</label><input type="number" name="Same_Day_Delivery" min="0">
-<label>Insured Letter</label><input type="number" name="Insured_Letter" min="0">
-<label>Insured Letter Fee</label><input type="number" name="Insured_Letter_Fee" min="0">
-<label>Insured Parcel</label><input type="number" name="Insured_Parcel" min="0">
-<label>Insured Parcel Fee</label><input type="number" name="Insured_Parcel_Fee" min="0">
-<label>MO Issue</label><input type="number" name="MO_Issue" min="0">
-<label>MO Value</label><input type="number" name="MO_Value" min="0">
-<label>MO Comm</label><input type="number" name="MO_Comm" min="0">
-<label>UMO Issue</label><input type="number" name="UMO_Issue" min="0">
-<label>UMO Value</label><input type="number" name="UMO_Value" min="0">
-<label>MO Paid</label><input type="number" name="MO_Paid" min="0">
-<label>MO Paid Amount</label><input type="number" name="MO_Paid_Amount" min="0">
-<label>UMO Paid</label><input type="number" name="UMO_Paid" min="0">
-<label>UMO Paid Amount</label><input type="number" name="UMO_Paid_Amount" min="0">
-<label>Packing Box Sale</label><input type="number" name="Packing_Box_Sale" min="0">
-<label>UMS Flyers Sold</label><input type="number" name="UMS_Flyers_Sold" min="0">
-<label>Postage Stamps Sale</label><input type="number" name="Postage_Stamps_Sale" min="0">
-<label>Revenue Stamps Sale</label><input type="number" name="Revenue_Stamps_Sale" min="0">
-<label>Unpaid Revenue</label><input type="number" name="Unpaid_Revenue" min="0">
-<label>Bulk User Recovery</label><input type="number" name="Bulk_User_Recovery" min="0">
-<label>Western Union Payments</label><input type="number" name="Western_Union_Payments" min="0">
-<label>Western Union Amount</label><input type="number" name="Western_Union_Amount" min="0">
-<label>Lesco Bills</label><input type="number" name="Lesco_Bills" min="0">
-<label>Lesco Amount</label><input type="number" name="Lesco_Amount" min="0">
-<label>SNGPL Bills</label><input type="number" name="SNGPL_Bills" min="0">
-<label>SNGPL Amount</label><input type="number" name="SNGPL_Amount" min="0">
-<label>WASA Bills</label><input type="number" name="WASA_Bills" min="0">
-<label>WASA Amount</label><input type="number" name="WASA_Amount" min="0">
-<label>PTCL Bills</label><input type="number" name="PTCL_Bills" min="0">
-<label>PTCL Amount</label><input type="number" name="PTCL_Amount" min="0">
+  <div class="container">
+    <h2>Daily Booking Report</h2>
+    <form id="bookingForm">
+      <div class="row">
+        <label for="officeName">Office Name</label>
+        <select id="officeName" name="officeName" required>
+          <option value="">Select Office</option>
+          <option>Adda Chabeel PO (1225)</option>
+          <option>AG House PO (1217)</option>
+          <option>Aitchison College PO</option>
+          <option>Alfalah PO</option>
+          <option>Allam Iqbal Road PO</option>
+          <option>Baghban Pura PO</option>
+          <option>Baghbanpura NPO</option>
+          <option>Barki PO</option>
+          <option>Bata Pur PO</option>
+          <option>Batapur NPO (1580)</option>
+          <option>Chah Miran PO</option>
+          <option>Chahmiran NPO (54)</option>
+          <option>Daroghawala PO</option>
+          <option>Dharampura PO</option>
+          <option>Ghaziabad PO (1303)</option>
+          <option>Gunj Mughalpura NPO (1576)</option>
+          <option>Gunj Mughalpura PO</option>
+          <option>Harbans Pura PO</option>
+          <option>Harbanspura NPO (1577)</option>
+          <option>KEMC NPO</option>
+          <option>Lakshmi Chowk PO</option>
+          <option>Mehmood Booti PO (1388)</option>
+          <option>Misri Shah PO</option>
+          <option>Mughalpura PO</option>
+          <option>Nabi Pura PO</option>
+          <option>Nabipura NPO (1678)</option>
+          <option>Naulakha NPO</option>
+          <option>Naulakha PO</option>
+          <option>Pakistan Times PO</option>
+          <option>PG HOUSE PO</option>
+          <option>Railway HQ PO</option>
+          <option>Shad Bagh NPO (1573)</option>
+          <option>Shad Bagh PO</option>
+          <option>Shalamar Town PO</option>
+          <option>Shalimar Town NPO (1572)</option>
+          <option>Sultanpura PO</option>
+          <option>Taj Company NPO</option>
+          <option>Taj Company PO</option>
+          <option>UET PO</option>
+          <option>V.R.I PO (1366)</option>
+          <option>Wagha PO</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="reportDate">Report Date</label>
+        <input type="date" id="reportDate" name="reportDate" required>
+      </div>
+      <div class="row">
+        <input type="text" name="RGL_PS" placeholder="RGL PS">
+        <input type="text" name="RGL_OPSS" placeholder="RGL OPSS">
+        <input type="text" name="RGL_Others" placeholder="RGL Others">
+      </div>
+      <div class="row">
+        <input type="text" name="Parcel" placeholder="Parcel">
+        <input type="text" name="Parcel_Postage" placeholder="Parcel Postage">
+      </div>
+      <div class="row">
+        <input type="text" name="VPL" placeholder="VPL">
+        <input type="text" name="VPL_Amount" placeholder="VPL Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="VPP" placeholder="VPP">
+        <input type="text" name="VPP_Amount" placeholder="VPP Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="Frgn_Regd_Letter" placeholder="Frgn Regd Letter">
+        <input type="text" name="Frgn_Regd_Fee" placeholder="Frgn Regd Fee">
+      </div>
+      <div class="row">
+        <input type="text" name="Frgn_Regd_Parcel" placeholder="Frgn Regd Parcel">
+        <input type="text" name="Frgn_Parcel_Postage" placeholder="Frgn Parcel Postage">
+      </div>
+      <div class="row">
+        <input type="text" name="EMS" placeholder="EMS">
+        <input type="text" name="EMS_Fee" placeholder="EMS Fee">
+        <input type="text" name="EMS_GST" placeholder="EMS GST">
+      </div>
+      <div class="row">
+        <input type="text" name="UMS" placeholder="UMS">
+        <input type="text" name="UMS_Value" placeholder="UMS Value">
+        <input type="text" name="UMS_GST" placeholder="UMS GST">
+      </div>
+      <div class="row">
+        <input type="text" name="COD" placeholder="COD">
+        <input type="text" name="COD_Value" placeholder="COD Value">
+        <input type="text" name="COD_Fee" placeholder="COD Fee">
+      </div>
+      <div class="row">
+        <input type="text" name="Same_Day_Delivery" placeholder="Same Day Delivery">
+      </div>
+      <div class="row">
+        <input type="text" name="Insured_Letter" placeholder="Insured Letter">
+        <input type="text" name="Insured_Letter_Fee" placeholder="Insured Letter Fee">
+      </div>
+      <div class="row">
+        <input type="text" name="Insured_Parcel" placeholder="Insured Parcel">
+        <input type="text" name="Insured_Parcel_Fee" placeholder="Insured Parcel Fee">
+      </div>
+      <div class="row">
+        <input type="text" name="MO_Issue" placeholder="MO Issue">
+        <input type="text" name="MO_Value" placeholder="MO Value">
+        <input type="text" name="MO_Comm" placeholder="MO Comm">
+      </div>
+      <div class="row">
+        <input type="text" name="UMO_Issue" placeholder="UMO Issue">
+        <input type="text" name="UMO_Value" placeholder="UMO Value">
+      </div>
+      <div class="row">
+        <input type="text" name="MO_Paid" placeholder="MO Paid">
+        <input type="text" name="MO_Paid_Amount" placeholder="MO Paid Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="UMO_Paid" placeholder="UMO Paid">
+        <input type="text" name="UMO_Paid_Amount" placeholder="UMO Paid Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="Packing_Box_Sale" placeholder="Packing Box Sale">
+        <input type="text" name="UMS_Flyers_Sold" placeholder="UMS Flyers Sold">
+      </div>
+      <div class="row">
+        <input type="text" name="Postage_Stamps_Sale" placeholder="Postage Stamps Sale">
+        <input type="text" name="Revenue_Stamps_Sale" placeholder="Revenue Stamps Sale">
+      </div>
+      <div class="row">
+        <input type="text" name="Unpaid_Revenue" placeholder="Unpaid Revenue">
+        <input type="text" name="Bulk_User_Recovery" placeholder="Bulk User Recovery">
+      </div>
+      <div class="row">
+        <input type="text" name="Western_Union_Payments" placeholder="Western Union Payments">
+        <input type="text" name="Western_Union_Amount" placeholder="Western Union Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="Lesco_Bills" placeholder="Lesco Bills">
+        <input type="text" name="Lesco_Amount" placeholder="Lesco Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="SNGPL_Bills" placeholder="SNGPL Bills">
+        <input type="text" name="SNGPL_Amount" placeholder="SNGPL Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="WASA_Bills" placeholder="WASA Bills">
+        <input type="text" name="WASA_Amount" placeholder="WASA Amount">
+      </div>
+      <div class="row">
+        <input type="text" name="PTCL_Bills" placeholder="PTCL Bills">
+        <input type="text" name="PTCL_Amount" placeholder="PTCL Amount">
+      </div>
 
-    <button type="submit">Submit</button>
-    <div class="success" id="response"></div>
-  </form>
-
+      <button type="submit">Submit</button>
+    </form>
+  </div>
   <script>
-    const form = document.getElementById('bookingForm');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-      fetch("https://script.google.com/macros/s/AKfycbwdlAB-WNttS7iu95zqcbmCxQJnvPmVAWgOXl0Ecq7-nCh6vb8Ofsb6Ks5Wn4JRkctoWA/exec", {
-        method: "POST",
-        body: formData
+  document.getElementById("bookingForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = new URLSearchParams();
+    for (const pair of formData) {
+      data.append(pair[0], pair[1]);
+    }
+
+    fetch(form.action, {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.text())
+      .then((text) => {
+        alert(text);
+        form.reset(); // ✅ This line clears all fields after successful submission
       })
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('response').innerText = data;
-        form.reset();
-      })
-      .catch(error => {
-        document.getElementById('response').innerText = "Submission failed";
-        console.error(error);
+      .catch((err) => {
+        alert("Error: " + err);
       });
-    });
-  </script>
+  });
+</script>
+
 </body>
 </html>
