@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>Daily Booking Report</title>
-  <meta name="viewport" content="width=device-width, initial-scale=0.5"> <!-- Important for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 15px;
       max-width: 600px;
       margin: auto;
-      font-size: 18px; /* larger font */
+      font-size: 18px;
     }
     label {
       display: block;
@@ -42,7 +42,7 @@
 <body>
   <h2>Daily Booking Report</h2>
   <form method="POST" action="https://script.google.com/macros/s/AKfycbz7bUTx7Dk4UWlGqrhoT3XNTxXsKluhGyvp-j4Hd8N6BJq25_C4O8Sq499htebY5AHh2g/exec">
-    
+
     <label for="officeName">Office Name:</label>
     <select name="officeName" id="officeName" required>
       <option value="">Select Office</option>
@@ -55,19 +55,19 @@
     <input type="date" name="reportDate" id="reportDate" required>
 
     <label>Registered Letter:</label>
-    <input type="number" name="RegisteredLetter">
+    <input type="number" name="registeredletter">
 
     <label>Registered Parcel:</label>
-    <input type="number" name="RegisteredParcel">
+    <input type="number" name="registeredParcel">
 
     <label>Parcel Postage:</label>
     <input type="number" name="parcelPostage">
 
-    <label>Intl. Letter:</label>
-    <input type="number" name="Intl.Letterems">
+    <label>EMS:</label>
+    <input type="number" name="ems">
 
-    <label>Intl. Letter Fee:</label>
-    <input type="number" name="Intl.LetterFee">
+    <label>Local Mail:</label>
+    <input type="number" name="localMail">
 
     <label>International Mail:</label>
     <input type="number" name="internationalMail">
@@ -97,23 +97,24 @@
     <input type="number" name="other">
 
     <button type="submit">Submit Report</button>
-  </form><script>
-  const form = document.querySelector('form');
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form)
+  </form>
+
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form)
+      });
+
+      if (response.ok) {
+        alert("✅ Report submitted successfully!");
+        form.reset();
+      } else {
+        alert("❌ Error submitting the form.");
+      }
     });
-
-    if (response.ok) {
-      alert("✅ Report submitted successfully!");
-      form.reset();  // Clear form fields after submission
-    } else {
-      alert("❌ Error submitting the form.");
-    }
-  });
-</script>
-
+  </script>
 </body>
 </html>
