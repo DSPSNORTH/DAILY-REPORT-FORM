@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post Office Daily Report</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, button { width: 100%; padding: 10px; margin-top: 5px; font-size: 16px; }
+    button { background-color: #28a745; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+
+  <h2>Daily Booking Report Form</h2>
+
+  <form id="reportForm" method="POST" action="https://script.google.com/macros/s/AKfycbwZ2C2vHr8uV9YERmsPvgzm5V4kNdJuul5RR9r3TWtzkDHxS2lFvUntv47J2MJtHF-xjw/exec">
+
+    <label for="OfficeName">Office Name</label>
+    <select name="OfficeName" required>
+      <option value="Lahore GPO">Lahore GPO</option>
+      <option value="Lahore Cantt">Lahore Cantt</option>
+      <option value="Lahore Johar Town">Lahore Johar Town</option>
+      <option value="Lahore Gulberg">Lahore Gulberg</option>
+      <option value="Lahore Model Town">Lahore Model Town</option>
+    </select>
+
+    <label for="DateOfReport">Date of Report</label>
+    <input type="date" name="DateOfReport" required />
+
+    <!-- Categories -->
+    <label>Speed Post</label>
+    <input type="number" name="Speed Post" min="0" />
+
+    <label>Registered Post</label>
+    <input type="number" name="Registered Post" min="0" />
+
+    <label>Parcel Post</label>
+    <input type="number" name="Parcel Post" min="0" />
+
+    <label>EMS</label>
+    <input type="number" name="EMS" min="0" />
+
+    <label>Local Mail</label>
+    <input type="number" name="Local Mail" min="0" />
+
+    <label>International Mail</label>
+    <input type="number" name="International Mail" min="0" />
+
+    <label>Money Order</label>
+    <input type="number" name="Money Order" min="0" />
+
+    <label>COD</label>
+    <input type="number" name="COD" min="0" />
+
+    <label>Logistics Post</label>
+    <input type="number" name="Logistics Post" min="0" />
+
+    <label>Business Post</label>
+    <input type="number" name="Business Post" min="0" />
+
+    <label>Ordinary Post</label>
+    <input type="number" name="Ordinary Post" min="0" />
+
+    <label>Philately</label>
+    <input type="number" name="Philately" min="0" />
+
+    <label>Savings Bank</label>
+    <input type="number" name="Savings Bank" min="0" />
+
+    <label>Recurring Deposit</label>
+    <input type="number" name="Recurring Deposit" min="0" />
+
+    <label>Time Deposit</label>
+    <input type="number" name="Time Deposit" min="0" />
+
+    <label>KVP/NSC Booking</label>
+    <input type="number" name="KVP/NSC Booking" min="0" />
+
+    <label>Insurance Services</label>
+    <input type="number" name="Insurance Services" min="0" />
+
+    <label>eCommerce Booking</label>
+    <input type="number" name="eCommerce Booking" min="0" />
+
+    <label>Inland Letter</label>
+    <input type="number" name="Inland Letter" min="0" />
+
+    <label>Postcard</label>
+    <input type="number" name="Postcard" min="0" />
+
+    <button type="submit">Submit Report</button>
+  </form>
+
+  <script>
+    document.getElementById('reportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this)
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result.result === 'success') {
+          alert('Report submitted successfully!');
+          this.reset();
+        } else {
+          alert('Error: ' + result.error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
