@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Booking Report</title>
+  <style>
+    body {
+      background-color: #cceeff;
+      font-family: Arial, sans-serif;
+    }
+    .form-container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #004080;
+    }
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .form-group label {
+      flex: 1 0 30%;
+      padding: 5px;
+      font-weight: bold;
+    }
+    .form-group input, .form-group select {
+      flex: 1 0 65%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .form-group input[type="submit"] {
+      flex: 1 0 100%;
+      margin-top: 15px;
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.95em;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("officeName").addEventListener("change", function () {
+        const office = this.value;
+        fetch(`https://script.google.com/macros/s/AKfycbx9KEoDpiS_kroFHxqc_uMZF4s-v4KJAVQbFwyPPc3bztCYY3922Amku8Las8T6DyWAxQ/exec?officeName=${encodeURIComponent(office)}`)
+          .then(res => res.text())
+          .then(rawDate => {
+            const parsed = new Date(rawDate);
+            const formatted = isNaN(parsed) ? rawDate : parsed.toDateString();
+            document.getElementById("lastEntered").value = formatted;
+          })
+          .catch(() => {
+            document.getElementById("lastEntered").value = "Fetch error";
+          });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Daily Booking Report</h2>
+    <form action="https://script.google.com/macros/s/AKfycbx3-AM9rsa1JHYNsd_hTQbQ1gQKIIpBYyyuYN2tHOf-1Em8CLy8hubjItpbEku9B4WqIA/exec" method="POST">
+      <div class="form-group">
+        <label for="officeName">Office Name</label>
+        <select name="officeName" id="officeName" required>
+          <option disabled selected value="">Select Office</option>
+          <option>Adda Chabeel PO (1225)</option><option>AG House PO (1217)</option><option>Aitchison College PO</option><option>Alfalah PO</option><option>Allam Iqbal Road PO</option><option>Baghban Pura PO</option><option>Baghbanpura NPO</option><option>Barki PO</option><option>Bata Pur PO</option><option>Batapur NPO (1580)</option><option>Chah Miran PO</option><option>Chahmiran NPO (54)</option><option>Daroghawala PO</option><option>Dharampura PO</option><option>Ghaziabad PO (1303)</option><option>Gunj Mughalpura PO</option><option>Harbans Pura PO</option><option>Harbanspura NPO (1577)</option><option>KEMC NPO</option><option>Lakshmi Chowk PO</option><option>Mehmood Booti PO (1388)</option><option>Misri Shah PO</option><option>Mughalpura PO</option><option>Nabi Pura PO</option><option>Naulakha PO</option><option>Pakistan Times PO</option><option>PG HOUSE PO</option><option>Railway HQ PO</option><option>Shad Bagh PO</option><option>Shalamar Town PO</option><option>Sultanpura PO</option><option>Taj Company PO</option><option>UET PO</option><option>V.R.I PO (1366)</option><option>Wagha PO</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="lastEntered">Last Entered</label>
+        <input type="text" id="lastEntered" readonly style="background:#f0f0f0; font-weight:bold;" />
+      </div>
+      <div class="form-group">
+        <label for="reportDate">Report Date</label>
+        <input type="date" name="reportDate" id="reportDate" required />
+      </div>
+
+      <div class="form-group">
+        <label for="RGL_PS">RGL PS</label>
+        <input type="number" name="RGL_PS" id="RGL_PS" />
+      </div>
+    
+      <div class="form-group">
+        <label for="RGL_OPSS">RGL OPSS</label>
+        <input type="number" name="RGL_OPSS" id="RGL_OPSS" />
+      </div>
+    
+      <div class="form-group">
+        <label for="RGL_Others">RGL Others</label>
+        <input type="number" name="RGL_Others" id="RGL_Others" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Parcel">Parcel</label>
+        <input type="number" name="Parcel" id="Parcel" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Parcel_Postage">Parcel Postage</label>
+        <input type="number" name="Parcel_Postage" id="Parcel_Postage" />
+      </div>
+    
+      <div class="form-group">
+        <label for="VPL">VPL</label>
+        <input type="number" name="VPL" id="VPL" />
+      </div>
+    
+      <div class="form-group">
+        <label for="VPL_Amount">VPL Amount</label>
+        <input type="number" name="VPL_Amount" id="VPL_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="VPP">VPP</label>
+        <input type="number" name="VPP" id="VPP" />
+      </div>
+    
+      <div class="form-group">
+        <label for="VPP_Amount">VPP Amount</label>
+        <input type="number" name="VPP_Amount" id="VPP_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Frgn_Regd_Letter">Frgn Regd Letter</label>
+        <input type="number" name="Frgn_Regd_Letter" id="Frgn_Regd_Letter" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Frgn_Regd_Fee">Frgn Regd Fee</label>
+        <input type="number" name="Frgn_Regd_Fee" id="Frgn_Regd_Fee" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Frgn_Regd_Parcel">Frgn Regd Parcel</label>
+        <input type="number" name="Frgn_Regd_Parcel" id="Frgn_Regd_Parcel" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Frgn_Parcel_Postage">Frgn Parcel Postage</label>
+        <input type="number" name="Frgn_Parcel_Postage" id="Frgn_Parcel_Postage" />
+      </div>
+    
+      <div class="form-group">
+        <label for="EMS">EMS</label>
+        <input type="number" name="EMS" id="EMS" />
+      </div>
+    
+      <div class="form-group">
+        <label for="EMS_Fee">EMS Fee</label>
+        <input type="number" name="EMS_Fee" id="EMS_Fee" />
+      </div>
+    
+      <div class="form-group">
+        <label for="EMS_GST">EMS GST</label>
+        <input type="number" name="EMS_GST" id="EMS_GST" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMS">UMS</label>
+        <input type="number" name="UMS" id="UMS" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMS_Value">UMS Value</label>
+        <input type="number" name="UMS_Value" id="UMS_Value" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMS_GST">UMS GST</label>
+        <input type="number" name="UMS_GST" id="UMS_GST" />
+      </div>
+    
+      <div class="form-group">
+        <label for="COD">COD</label>
+        <input type="number" name="COD" id="COD" />
+      </div>
+    
+      <div class="form-group">
+        <label for="COD_Value">COD Value</label>
+        <input type="number" name="COD_Value" id="COD_Value" />
+      </div>
+    
+      <div class="form-group">
+        <label for="COD_Fee">COD Fee</label>
+        <input type="number" name="COD_Fee" id="COD_Fee" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Same_Day_Delivery">Same Day Delivery</label>
+        <input type="number" name="Same_Day_Delivery" id="Same_Day_Delivery" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Insured_Letter">Insured Letter</label>
+        <input type="number" name="Insured_Letter" id="Insured_Letter" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Insured_Letter_Fee">Insured Letter Fee</label>
+        <input type="number" name="Insured_Letter_Fee" id="Insured_Letter_Fee" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Insured_Parcel">Insured Parcel</label>
+        <input type="number" name="Insured_Parcel" id="Insured_Parcel" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Insured_Parcel_Fee">Insured Parcel Fee</label>
+        <input type="number" name="Insured_Parcel_Fee" id="Insured_Parcel_Fee" />
+      </div>
+    
+      <div class="form-group">
+        <label for="MO_Issue">MO Issue</label>
+        <input type="number" name="MO_Issue" id="MO_Issue" />
+      </div>
+    
+      <div class="form-group">
+        <label for="MO_Value">MO Value</label>
+        <input type="number" name="MO_Value" id="MO_Value" />
+      </div>
+    
+      <div class="form-group">
+        <label for="MO_Comm">MO Comm</label>
+        <input type="number" name="MO_Comm" id="MO_Comm" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMO_Issue">UMO Issue</label>
+        <input type="number" name="UMO_Issue" id="UMO_Issue" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMO_Value">UMO Value</label>
+        <input type="number" name="UMO_Value" id="UMO_Value" />
+      </div>
+    
+      <div class="form-group">
+        <label for="MO_Paid">MO Paid</label>
+        <input type="number" name="MO_Paid" id="MO_Paid" />
+      </div>
+    
+      <div class="form-group">
+        <label for="MO_Paid_Amount">MO Paid Amount</label>
+        <input type="number" name="MO_Paid_Amount" id="MO_Paid_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMO_Paid">UMO Paid</label>
+        <input type="number" name="UMO_Paid" id="UMO_Paid" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMO_Paid_Amount">UMO Paid Amount</label>
+        <input type="number" name="UMO_Paid_Amount" id="UMO_Paid_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Packing_Box_Sale">Packing Box Sale</label>
+        <input type="number" name="Packing_Box_Sale" id="Packing_Box_Sale" />
+      </div>
+    
+      <div class="form-group">
+        <label for="UMS_Flyers_Sold">UMS Flyers Sold</label>
+        <input type="number" name="UMS_Flyers_Sold" id="UMS_Flyers_Sold" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Postage_Stamps_Sale">Postage Stamps Sale</label>
+        <input type="number" name="Postage_Stamps_Sale" id="Postage_Stamps_Sale" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Revenue_Stamps_Sale">Revenue Stamps Sale</label>
+        <input type="number" name="Revenue_Stamps_Sale" id="Revenue_Stamps_Sale" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Unpaid_Revenue">Unpaid Revenue</label>
+        <input type="number" name="Unpaid_Revenue" id="Unpaid_Revenue" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Bulk_User_Recovery">Bulk User Recovery</label>
+        <input type="number" name="Bulk_User_Recovery" id="Bulk_User_Recovery" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Western_Union_Payments">Western Union Payments</label>
+        <input type="number" name="Western_Union_Payments" id="Western_Union_Payments" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Western_Union_Amount">Western Union Amount</label>
+        <input type="number" name="Western_Union_Amount" id="Western_Union_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Lesco_Bills">Lesco Bills</label>
+        <input type="number" name="Lesco_Bills" id="Lesco_Bills" />
+      </div>
+    
+      <div class="form-group">
+        <label for="Lesco_Amount">Lesco Amount</label>
+        <input type="number" name="Lesco_Amount" id="Lesco_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="SNGPL_Bills">SNGPL Bills</label>
+        <input type="number" name="SNGPL_Bills" id="SNGPL_Bills" />
+      </div>
+    
+      <div class="form-group">
+        <label for="SNGPL_Amount">SNGPL Amount</label>
+        <input type="number" name="SNGPL_Amount" id="SNGPL_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="WASA_Bills">WASA Bills</label>
+        <input type="number" name="WASA_Bills" id="WASA_Bills" />
+      </div>
+    
+      <div class="form-group">
+        <label for="WASA_Amount">WASA Amount</label>
+        <input type="number" name="WASA_Amount" id="WASA_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <label for="PTCL_Bills">PTCL Bills</label>
+        <input type="number" name="PTCL_Bills" id="PTCL_Bills" />
+      </div>
+    
+      <div class="form-group">
+        <label for="PTCL_Amount">PTCL Amount</label>
+        <input type="number" name="PTCL_Amount" id="PTCL_Amount" />
+      </div>
+    
+      <div class="form-group">
+        <input type="submit" value="Submit Report" />
+      </div>
+    </form>
+    <div class="footer">ONLINE REPORTING SYSTEM, DESIGNED BY AHMAD IQBAL</div>
+  </div>
+</body>
+</html>
